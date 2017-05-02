@@ -1,7 +1,14 @@
 /* @flow */
 
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, Button } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  Button
+} from 'react-native';
 
 export default class TicTacToe extends React.Component {
   constructor(props) {
@@ -17,7 +24,13 @@ export default class TicTacToe extends React.Component {
   renderBoard() {
     const board = [];
     for (let i = 1; i <= 9; i++) {
-      board.push(<TouchableOpacity key={i} style={styles.box} onPress={this.tapped.bind(this, i)}><Text style={styles.value}>{this.state.x.includes(i) ? 'x' : (this.state.o.includes(i) ? 'o' : null)}</Text></TouchableOpacity>)
+      board.push(
+        <TouchableOpacity key={i} style={styles.box} onPress={this.tapped.bind(this, i)}>
+        <Text style={styles.value}>
+          {this.state.x.includes(i) ? 'x' : (this.state.o.includes(i) ? 'o' : null)}
+        </Text>
+      </TouchableOpacity>
+      )
     }
     return board;
   }
