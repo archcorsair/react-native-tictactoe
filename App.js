@@ -48,7 +48,7 @@ export default class App extends React.Component {
           {createBoard()}
           <Button title="Reset" onPress={reset} />
           <View>
-            <Text>Player {this.state.currentPlayer}'s Turn</Text>
+            <Text>Player Turn: {this.state.currentPlayer}</Text>
           </View>
         </View>
       </View>
