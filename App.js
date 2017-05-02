@@ -8,37 +8,31 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       currentPlayer: 'X',
-      box1: '',
-      box2: '',
-      box3: '',
-      box4: '',
-      box5: '',
-      box6: '',
-      box7: '',
-      box8: '',
-      box9: '',
+      x: [],
+      o: [],
     }
-
   }
 
   render() {
     const tapped = (i, event) => {
       if (this.state.currentPlayer === 'X') {
-        this.setState({ [`box${i}`]: 'X', currentPlayer: 'O' })
+        x = this.state.x
+        x.push(i)
+        this.setState({ x: x, currentPlayer: 'O' })
       } else {
-        this.setState({ [`box${i}`]: 'O', currentPlayer: 'X' })
+        o = this.state.o
+        o.push(i)
+        this.setState({ o: o, currentPlayer: 'X' })
       }
     }
     const reset = () => {
-      for (let i = 1; i <= 9; i++) {
-        this.setState({ [`box${i}`]: '', currentPlayer: 'X' });
-      }
+      this.setState({ x: [], o: [], currentPlayer: "X" })
       Alert.alert('Board has been reset');
     }
     const createBoard = () => {
       const board = [];
       for (let i = 1; i <= 9; i++) {
-        board.push(<TouchableOpacity key={i} style={styles.box} onPress={tapped.bind(this, i)}><Text style={styles.value}>{this.state[`box${i}`]}</Text></TouchableOpacity>)
+        board.push(<TouchableOpacity key={i} style={styles.box} onPress={tapped.bind(this, i)}><Text style={styles.value}>{this.state.x.includes(i) ? 'x' : (this.state.o.includes(i) ? 'o' : null)}</Text></TouchableOpacity>)
       }
       return board;
     }
