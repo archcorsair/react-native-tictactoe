@@ -14,7 +14,7 @@ export default class TicTacToe extends React.Component {
     this.resetBoard = this.resetBoard.bind(this);
   }
 
-  createBoard() {
+  renderBoard() {
     const board = [];
     for (let i = 1; i <= 9; i++) {
       board.push(<TouchableOpacity key={i} style={styles.box} onPress={this.tapped.bind(this, i)}><Text style={styles.value}>{this.state.x.includes(i) ? 'x' : (this.state.o.includes(i) ? 'o' : null)}</Text></TouchableOpacity>)
@@ -43,7 +43,7 @@ export default class TicTacToe extends React.Component {
     return (
       <View>
         <View style={styles.container}>
-          {this.createBoard()}
+          {this.renderBoard()}
           <Button title="Reset" onPress={this.resetBoard} />
           <Text>Player Turn: {this.state.currentPlayer}</Text>
         </View>
