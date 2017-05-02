@@ -3,7 +3,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert, Button } from 'react-native';
 
-export default class App extends React.Component {
+export default class TicTacToe extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -11,36 +11,40 @@ export default class App extends React.Component {
       x: [],
       o: [],
     }
+    this.resetBoard = this.resetBoard.bind(this);
+  }
+
+  createBoard() {
+    const board = [];
+    for (let i = 1; i <= 9; i++) {
+      board.push(<TouchableOpacity key={i} style={styles.box} onPress={this.tapped.bind(this, i)}><Text style={styles.value}>{this.state.x.includes(i) ? 'x' : (this.state.o.includes(i) ? 'o' : null)}</Text></TouchableOpacity>)
+    }
+    return board;
+  }
+
+  tapped(i, event) {
+    if (this.state.currentPlayer === 'X') {
+      x = this.state.x
+      x.push(i)
+      this.setState({ x: x, currentPlayer: 'O' })
+    } else {
+      o = this.state.o
+      o.push(i)
+      this.setState({ o: o, currentPlayer: 'X' })
+    }
+
+  }
+  resetBoard() {
+    this.setState({ x: [], o: [], currentPlayer: "X" })
+    Alert.alert('Board has been reset');
   }
 
   render() {
-    const tapped = (i, event) => {
-      if (this.state.currentPlayer === 'X') {
-        x = this.state.x
-        x.push(i)
-        this.setState({ x: x, currentPlayer: 'O' })
-      } else {
-        o = this.state.o
-        o.push(i)
-        this.setState({ o: o, currentPlayer: 'X' })
-      }
-    }
-    const reset = () => {
-      this.setState({ x: [], o: [], currentPlayer: "X" })
-      Alert.alert('Board has been reset');
-    }
-    const createBoard = () => {
-      const board = [];
-      for (let i = 1; i <= 9; i++) {
-        board.push(<TouchableOpacity key={i} style={styles.box} onPress={tapped.bind(this, i)}><Text style={styles.value}>{this.state.x.includes(i) ? 'x' : (this.state.o.includes(i) ? 'o' : null)}</Text></TouchableOpacity>)
-      }
-      return board;
-    }
     return (
       <View>
         <View style={styles.container}>
-          {createBoard()}
-          <Button title="Reset" onPress={reset} />
+          {this.createBoard()}
+          <Button title="Reset" onPress={this.resetBoard} />
           <View>
             <Text>Player Turn: {this.state.currentPlayer}</Text>
           </View>
