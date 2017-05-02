@@ -24,11 +24,11 @@ export default class TicTacToe extends React.Component {
 
   tapped(i, event) {
     if (this.state.currentPlayer === 'X') {
-      x = this.state.x
+      const x = this.state.x
       x.push(i)
       this.setState({ x: x, currentPlayer: 'O' })
     } else {
-      o = this.state.o
+      const o = this.state.o
       o.push(i)
       this.setState({ o: o, currentPlayer: 'X' })
     }
@@ -45,9 +45,7 @@ export default class TicTacToe extends React.Component {
         <View style={styles.container}>
           {this.createBoard()}
           <Button title="Reset" onPress={this.resetBoard} />
-          <View>
-            <Text>Player Turn: {this.state.currentPlayer}</Text>
-          </View>
+          <Text>Player Turn: {this.state.currentPlayer}</Text>
         </View>
       </View>
     );
